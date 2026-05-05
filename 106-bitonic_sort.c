@@ -20,16 +20,28 @@ static void swap(int *array, size_t size, size_t i, size_t j)
 }
 
 /**
- * bitonic_merge - Merges a bitonic sequence in given direction
+ * bitonic_merge - Merges a bitonic sequence, printing header and result
  *
  * @array: The full array
  * @size: Total size of the array
- * @start: Start index of the sub-array
+ * @start: Start index of the sequence
  * @count: Number of elements in the sequence
  * @up: 1 for ascending, 0 for descending
  */
 static void bitonic_merge(int *array, size_t size,
-			size_t start, size_t count, int up)
+			size_t start, size_t count, int up);
+
+/**
+ * do_merge - Performs the actual compare-swap pass then recurses
+ *
+ * @array: The full array
+ * @size: Total size of the array
+ * @start: Start index of the sequence
+ * @count: Number of elements in the sequence
+ * @up: 1 for ascending, 0 for descending
+ */
+static void do_merge(int *array, size_t size,
+		size_t start, size_t count, int up)
 {
 	size_t half;
 	size_t i;
@@ -38,24 +50,28 @@ static void bitonic_merge(int *array, size_t size,
 		return;
 
 	half = count / 2;
-
-	printf("Merging [%lu/%lu] (%s):\n", count, size,
-		up ? "UP" : "DOWN");
-	print_array(array + start, count);
-
 	for (i = start; i < start + half; i++)
 	{
 		if ((up && array[i] > array[i + half]) ||
 			(!up && array[i] < array[i + half]))
 			swap(array, size, i, i + half);
 	}
-
 	printf("Result [%lu/%lu] (%s):\n", count, size,
 		up ? "UP" : "DOWN");
 	print_array(array + start, count);
-
 	bitonic_merge(array, size, start, half, up);
 	bitonic_merge(array, size, start + half, half, up);
+}
+
+static void bitonic_merge(int *array, size_t size,
+			size_t start, size_t count, int up)
+{
+	if (count <= 1)
+		return;
+	printf("Merging [%lu/%lu] (%s):\n", count, size,
+		up ? "UP" : "DOWN");
+	print_array(array + start, count);
+	do_merge(array, size, start, count, up);
 }
 
 /**
