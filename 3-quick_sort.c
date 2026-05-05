@@ -47,6 +47,10 @@ return (i);
 
 /**
  * quick_sort_rec - recursive quicksort
+ * @array: array to sort
+ * @low: start index
+ * @high: end index
+ * @size: array size
  */
 void quick_sort_rec(int *array, int low, int high, size_t size)
 {
