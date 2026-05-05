@@ -1,9 +1,9 @@
 #include "sort.h"
 
 /**
- * swap - Swaps two integers in an array and prints the result
+ * swap - Swaps two integers and prints the full array
  *
- * @array: The array containing the elements
+ * @array: The full array
  * @size: Total size of the array
  * @i: Index of the first element
  * @j: Index of the second element
@@ -19,14 +19,14 @@ static void swap(int *array, size_t size, size_t i, size_t j)
 }
 
 /**
- * hoare_partition - Partitions a sub-array using Hoare scheme
+ * hoare_partition - Partitions array using Hoare scheme, pivot = last element
  *
  * @array: The full array
  * @size: Total size of the array
  * @lo: Left boundary index
- * @hi: Right boundary index (pivot)
+ * @hi: Right boundary index (pivot position)
  *
- * Return: Final index of the pivot after partition
+ * Return: Final index where pivot is placed
  */
 static size_t hoare_partition(int *array, size_t size, size_t lo, size_t hi)
 {
@@ -36,7 +36,7 @@ static size_t hoare_partition(int *array, size_t size, size_t lo, size_t hi)
 
 	pivot = array[hi];
 	i = lo;
-	j = hi - 1;
+	j = hi;
 
 	while (1)
 	{
@@ -46,14 +46,12 @@ static size_t hoare_partition(int *array, size_t size, size_t lo, size_t hi)
 			j--;
 		if (i >= j)
 			break;
-		if (array[i] != array[j])
-			swap(array, size, i, j);
-		i++;
+		swap(array, size, i, j);
+		if (i < hi)
+			i++;
 		if (j > lo)
 			j--;
 	}
-	if (array[i] != array[hi])
-		swap(array, size, i, hi);
 	return (i);
 }
 
