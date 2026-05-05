@@ -39,7 +39,7 @@ static void bitonic_merge(int *array, size_t size,
 
 	half = count / 2;
 
-	printf("Merging [%lu/%lu] (%s):\n", count, size,
+	printf("Merging [%u/%u] (%s):\n", count, size,
 		up ? "UP" : "DOWN");
 	print_array(array + start, count);
 
@@ -50,7 +50,7 @@ static void bitonic_merge(int *array, size_t size,
 			swap(array, size, i, i + half);
 	}
 
-	printf("Result [%lu/%lu] (%s):\n", count, size,
+	printf("Result [%u/%u] (%s):\n", count, size,
 		up ? "UP" : "DOWN");
 	print_array(array + start, count);
 
