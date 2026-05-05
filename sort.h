@@ -36,7 +36,8 @@ void radix_sort(int *array, size_t size);
 void bitonic_sort(int *array, size_t size);
 void quick_sort_hoare(int *array, size_t size);
 
-/* Deck sorting (1000-sort_deck.c)
+/**
+ * enum kind_e - Card suits
  * @SPADE: Spade suit
  * @HEART: Heart suit
  * @CLUB: Club suit
