@@ -21,7 +21,7 @@ if (i != j)
 {
 tmp = array[i];
 array[i] = array[j];
- array[j] = tmp;
+array[j] = tmp;
 
 /* Print ONLY if swap changes the array */
 if (array[i] != array[j])
