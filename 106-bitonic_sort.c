@@ -4,7 +4,7 @@
 /**
  * swap - Swaps two integers in an array and prints the result
  *
- * @array: The array containing the elements
+ * @array: The full array
  * @size: Total size of the array
  * @i: Index of the first element
  * @j: Index of the second element
@@ -25,9 +25,35 @@ static void swap(int *array, size_t size, size_t i, size_t j)
  * @array: The full array
  * @size: Total size of the array
  * @start: Start index of the sub-array
- * @count: Number of elements in the sub-array
- * @up: 1 for ascending order, 0 for descending
+ * @count: Number of elements in this sequence
+ * @up: 1 for ascending, 0 for descending
  */
+static void bitonic_merge(int *array, size_t size,
+			size_t start, size_t count, int up);
+
+/**
+ * bitonic_recurse - Recursively builds and merges bitonic sequences
+ *
+ * @array: The full array
+ * @size: Total size of the array
+ * @start: Start index of the sub-array
+ * @count: Number of elements in this sequence
+ * @up: 1 for ascending, 0 for descending
+ */
+static void bitonic_recurse(int *array, size_t size,
+			size_t start, size_t count, int up)
+{
+	size_t half;
+
+	if (count <= 1)
+		return;
+
+	half = count / 2;
+	bitonic_recurse(array, size, start, half, 1);
+	bitonic_recurse(array, size, start + half, half, 0);
+	bitonic_merge(array, size, start, count, up);
+}
+
 static void bitonic_merge(int *array, size_t size,
 			size_t start, size_t count, int up)
 {
@@ -54,30 +80,6 @@ static void bitonic_merge(int *array, size_t size,
 
 	bitonic_merge(array, size, start, half, up);
 	bitonic_merge(array, size, start + half, half, up);
-}
-
-/**
- * bitonic_recurse - Recursively builds a bitonic sequence then merges
- *
- * @array: The full array
- * @size: Total size of the array
- * @start: Start index of the sub-array
- * @count: Number of elements in the sub-array
- * @up: 1 for ascending, 0 for descending
- */
-static void bitonic_recurse(int *array, size_t size,
-			size_t start, size_t count, int up)
-{
-	size_t half;
-
-	if (count <= 1)
-		return;
-
-	half = count / 2;
-
-	bitonic_recurse(array, size, start, half, 1);
-	bitonic_recurse(array, size, start + half, half, 0);
-	bitonic_merge(array, size, start, count, up);
 }
 
 /**
