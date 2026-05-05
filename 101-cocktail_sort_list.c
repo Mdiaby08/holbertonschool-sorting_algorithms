@@ -28,6 +28,7 @@ static void swap_nodes(listint_t **list, listint_t *a, listint_t *b)
  *
  * @list: Pointer to the head of the list
  * @top: Node where the right boundary stops
+ * @swapped: Pointer to the swap flag, set to 1 if a swap occurred
  *
  * Return: The last node reached (new right boundary)
  */
@@ -57,6 +58,7 @@ static listint_t *forward_pass(listint_t **list, listint_t *top,
  * @list: Pointer to the head of the list
  * @bot: Node where the left boundary stops
  * @cur: Starting node (rightmost unsorted)
+ * @swapped: Pointer to the swap flag, set to 1 if a swap occurred
  *
  * Return: The last node reached (new left boundary)
  */
