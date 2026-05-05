@@ -36,7 +36,12 @@ void radix_sort(int *array, size_t size);
 void bitonic_sort(int *array, size_t size);
 void quick_sort_hoare(int *array, size_t size);
 
-/* Deck sorting (1000-sort_deck.c) */
+/* Deck sorting (1000-sort_deck.c)
+* @SPADE: Spade suit
+ * @HEART: Heart suit
+ * @CLUB: Club suit
+ * @DIAMOND: Diamond suit
+ */
 typedef enum kind_e
 {
 SPADE = 0,
